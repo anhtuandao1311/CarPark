@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicles</title>
+</head>
+
+<body>
+    <h1>All Vehicles</h1>
+
+    <form action="/vehicles">
+        <input type="checkbox" id="four-seater" name="fourseater" value="true">
+        <label for="four-seater">4 Seater</label><br>
+        <input type="checkbox" id="four-seater" name="sevenseater" value="true">
+        <label for="seven-seater">7 Seater</label><br>
+        <input type="checkbox" id="four-seater" name="truck" value="true">
+        <label for="truck">Truck</label><br>
+        <button>Filter</button>
+    </form>
+
+    <ul>
+        <% for (let vehicle of vehicles){ %>
+            <li>
+                <h2>License: <%= vehicle.licensePlate %>
+                </h2>
+                <p>Type: <%= vehicle.vehicleType %>
+                </p>
+                <p>Enter Time: <%= vehicle.enterTime.toLocaleString() %>
+                </p>
+                <p>Leave Time: <%= vehicle.leaveTime ? vehicle.leaveTime.toLocaleString() :'Still in parking lot' %>
+                </p>
+                <p>Total Fee: <%= vehicle.totalFee %>
+                </p>
+            </li>
+            <hr>
+            <% } %>
+
+    </ul>
+</body>
+
+</html>

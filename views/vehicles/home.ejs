@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+
+<body>
+
+  <!-- Car in -->
+  <h1>Car enter</h1>
+  <form action="/" method="post">
+    <div>
+      <input type="text" name="license" placeholder="Enter license plate">
+    </div>
+
+    <div>
+      <select name="type">
+        <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
+        <option value="Four Seater">4 Seater</option>
+        <option value="Seven Seater">7 Seater</option>
+        <option value="Truck">Truck</option>
+      </select>
+    </div>
+
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+
+  <h1>Car leave</h1>
+  <!-- Car out -->
+  <form action="/?_method=PATCH" method="post">
+    <div>
+      <input type="text" name="license" placeholder="Enter license plate">
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+
+
+  <a href="/vehicles">View all vehicles</a>
+
+</body>
+
+</html>
