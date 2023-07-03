@@ -1,0 +1,15 @@
+For simple we have 3 types of vehicle: 4 seater car, 7 seater car and Truck
+Fee of parking: 5$/day, 7$/day, 9$/day and admin can custom the fee
+While vehicle parking car owner want to make service for their car as: wash, change oil,... So the fee will be count with description
+Each car have: Number, Input Time
+
+Time will be count: 1 - >=24h as 1day, 24h - >=48h as 2day and so on.
+- Calculate the bill for each car/all car base in today or in the future.
+- Summary car input/output in day/month/year
+- Count number for each car
+
+Bonus: Assumption you are the boss then want to sale your product for many customer. So thinking about what is more feature user want to use and make this for money.
+
+User: Want to have the good application and friendly so they can easy to use.
+Technical: Want to see the clean code, structure code, easy maintain or add more feature if have in the future.
+
