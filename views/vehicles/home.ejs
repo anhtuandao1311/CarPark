@@ -1,17 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-</head>
-
-<body>
-
+<% layout('layouts/boilerplate') %>
   <!-- Car in -->
-  <h1>Car enter</h1>
+  <div class="row">
+    <div class="col-5">
+      <h1>Car enter</h1>
+      <form action="/" method="post">
+        <div class="mb-3">
+          <label for="license" class="form-label">License Plate</label>
+          <input type="text" class="form-control" id="license" aria-describedby="license" placeholder="Enter license plate" name="license">
+        </div>
+        <div class="mb-3">
+          <label for="type" class="form-label">Vehicle Type</label>
+          <select name="type" class="form-select" id="type">
+            <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
+            <option value="Four Seater">4 Seater</option>
+            <option value="Seven Seater">7 Seater</option>
+            <option value="Truck">Truck</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="col-5 ">
+      <h1>Car leave</h1>
+      <form action="/" method="post">
+        <div class="mb-3">
+          <label for="license" class="form-label">License Plate</label>
+          <input type="text" class="form-control" id="license" aria-describedby="license" placeholder="Enter license plate" name="license">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+  
+
+<!--   
+  <form action="/?_method=PATCH" method="post">
+    <div>
+      <input type="text" name="license" placeholder="Enter license plate">
+    </div>
+    <div>
+      <button>Submit</button>
+    </div>
+  </form>
+
+
+  <a href="/vehicles">View all vehicles</a>
+
+
+
   <form action="/" method="post">
     <div>
       <input type="text" name="license" placeholder="Enter license plate">
@@ -29,22 +68,4 @@
     <div>
       <button>Submit</button>
     </div>
-  </form>
-
-  <h1>Car leave</h1>
-  <!-- Car out -->
-  <form action="/?_method=PATCH" method="post">
-    <div>
-      <input type="text" name="license" placeholder="Enter license plate">
-    </div>
-    <div>
-      <button>Submit</button>
-    </div>
-  </form>
-
-
-  <a href="/vehicles">View all vehicles</a>
-
-</body>
-
-</html>
+  </form> -->

@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
+const ejsMate = require('ejs-mate')
 
 // Require modules
 const Vehicle = require('./models/vehicle')
@@ -20,9 +21,12 @@ db.once('open', () => {
 
 const app = express()
 
+app.engine('ejs',ejsMate)
+
 // Set view engine to open from different location
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 
 // Parse request body
