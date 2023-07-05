@@ -65,20 +65,20 @@ app.patch('/', async (req, res) => {
 
 app.get('/vehicles', async (req, res) => {
   const { fourseater: fourSeater, sevenseater: sevenSeater, truck } = req.query
-  const vehicles = []
+  let vehicles = []
   if (fourSeater) {
-    vehicles.concat(await Vehicle.find({ vehicleType: 'Four Seater' }))
+    vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Four Seater' }))
   }
   if (sevenSeater) {
-    vehicles.concat(await Vehicle.find({ vehicleType: 'Seven Seater' }))
+    vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Seven Seater' }))
   }
   if (truck) {
-    vehicles.concat(await Vehicle.find({ vehicleType: 'Truck' }))
+    vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Truck' }))
   }
 
   if (!fourSeater && !sevenSeater && !truck) {
     const foundVehicles = await Vehicle.find({})
-    vehicles.concat(foundVehicles)
+    vehicles = vehicles.concat(foundVehicles)
   }
   res.render('vehicles/index', {vehicles})
 })

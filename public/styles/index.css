@@ -1,0 +1,13 @@
+.my-custom-scrollbar {
+  position: relative;
+  height: 600px;
+  overflow: auto;
+  display: block;
+}
+
+
+.my-custom-scrollbar thead{
+  position: sticky;
+  top:0;
+}
+

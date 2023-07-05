@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') %>
   <!-- Car in -->
-  <div class="row">
+  <div class="row" style="margin-top: 10rem;">
     <div class="offset-2 col-4">
       <h1>Car enter</h1>
       <form action="/" method="post">
@@ -23,7 +23,7 @@
 
     <div class="col-4">
       <h1>Car leave</h1>
-      <form action="/" method="post">
+      <form action="/?_method=PATCH" method="post">
         <div class="mb-3">
           <label for="license" class="form-label">License Plate</label>
           <input type="text" class="form-control" id="license" aria-describedby="license" placeholder="Enter license plate" name="license">

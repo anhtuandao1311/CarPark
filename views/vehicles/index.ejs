@@ -1,30 +1,218 @@
 <% layout('layouts/boilerplate') %>
 
-<h1>All Vehicles</h1>
+  <h1>All Vehicles</h1>
 
-<form action="/vehicles">
-  <input type="checkbox" id="four-seater" name="fourseater" value="true">
-  <label for="four-seater">4 Seater</label><br>
-  <input type="checkbox" id="four-seater" name="sevenseater" value="true">
-  <label for="seven-seater">7 Seater</label><br>
-  <input type="checkbox" id="four-seater" name="truck" value="true">
-  <label for="truck">Truck</label><br>
-  <button>Filter</button>
-</form>
+  <form action="/vehicles" method="post">
+    <div class="row">
+      <div class="col">
+        <div class="form-outline">
+          <label for="type" class="form-label">Vehicle Type</label>
+          <select name="type" class="form-select" id="type">
+            <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
+            <option value="Four Seater">4 Seater</option>
+            <option value="Seven Seater">7 Seater</option>
+            <option value="Truck">Truck</option>
+          </select>
+        </div>
+      </div>
 
-<ul>
-  <% for (let vehicle of vehicles){ %>
-    <li>
-      <h2>License: <%= vehicle.licensePlate %>
-      </h2>
-      <p>Type: <%= vehicle.vehicleType %>
-      </p>
-      <p>Enter Time: <%= vehicle.enterTime.toLocaleString() %>
-      </p>
-      <p>Leave Time: <%= vehicle.leaveTime ? vehicle.leaveTime.toLocaleString() :'Still in parking lot' %>
-      </p>
-      <p>Total Fee: <%= vehicle.totalFee %>$p>
-    </li>
-    <hr>
+      <div class="col">
+        <div class="form-outline">
+          <label for="view" class="form-label">Vehicle view</label>
+          <select name="view" class="form-select" id="view">
+            <option value="" disabled selected hidden>--Please Choose View Type--</option>
+            <option value="">Day</option>
+            <option value="Seven Seater">Month</option>
+            <option value="Truck">Year</option>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="view" class="form-label">Vehicle view</label>
+        <select name="view" class="form-select" id="view">
+          <option value="" disabled selected hidden>--Please Choose View Type--</option>
+          <option value="">4 Seater</option>
+          <option value="Seven Seater">7 Seater</option>
+          <option value="Truck">Truck</option>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          Check me out
+        </label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+
+
+
+  <form action="/vehicles">
+    <div class="row">
+      <div class="col">
+        <input type="checkbox" id="four-seater" name="fourseater" value="true">
+        <label for="four-seater">4 Seater</label><br>
+        <input type="checkbox" id="seven-seater" name="sevenseater" value="true">
+        <label for="seven-seater">7 Seater</label><br>
+        <input type="checkbox" id="truck" name="truck" value="true">
+        <label for="truck">Truck</label><br>
+      </div>
+
+      <div class="col select-view-by">
+        <div class="display-4">Sort by</div>
+        <div class="form-check">
+          <input class="form-check-input " type="radio" name="view" id="day" value="day">
+          <label class="form-check-label" for="day">
+            Day
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="view" id="month" value="month">
+          <label class="form-check-label" for="month">
+            Month
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="view" id="year" value="year">
+          <label class="form-check-label" for="year">
+            Year
+          </label>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group row">
+          <label for="datepicker" class="col-3 col-form-label">Date Picker</label>
+          <div class="col-9 input-group">
+            <input type="text" class="form-control bg-white" id="datepicker" readonly>
+            <span class="input-group-append">
+              <span class="input-group-text bg-light d-block">
+                <i class="bi bi-calendar"></i>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="monthpicker" class="col-3 col-form-label">Month Picker</label>
+          <div class="col-9 input-group">
+            <input type="text" class="form-control bg-white" id="monthpicker" readonly>
+            <span class="input-group-append">
+              <span class="input-group-text bg-light d-block">
+                <i class="bi bi-calendar"></i>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="yearpicker" class="col-3 col-form-label">Year Picker</label>
+          <div class="col-9 input-group">
+            <input type="text" class="form-control bg-white" id="yearpicker" readonly>
+            <span class="input-group-append">
+              <span class="input-group-text bg-light d-block">
+                <i class="bi bi-calendar"></i>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <button>Filter</button>
+  </form>
+  <% if(vehicles.length!==0){ %>
+    <div class="table-wrapper-scroll-y my-custom-scrollbar mt-5">
+      <table class="table align-middle mb-0 bg-white table-responsive" id="data-table">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>License Plate</th>
+            <th>Vehicle Type</th>
+            <th>Status</th>
+            <th>Enter Time</th>
+            <th>Leave Time</th>
+            <th>Total Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let vehicle of vehicles){ %>
+            <tr>
+              <td>
+                <p class="fw-bold mb-1">
+                  <%= vehicle.licensePlate %>
+                </p>
+              </td>
+
+              <td>
+                <p class="fw-normal mb-1">
+                  <%= vehicle.vehicleType %>
+                </p>
+              </td>
+
+              <td>
+                <% if(vehicle.leaveTime){ %>
+                  <span class="badge rounded-pill bg-success">OUT</span>
+                  <% }else{ %>
+                    <span class="badge rounded-pill bg-warning">IN</span>
+                    <% } %>
+              </td>
+
+              <td>
+                <p class="fw-normal mb-1">
+                  <%= vehicle.enterTime.toLocaleString() %>
+                </p>
+              </td>
+
+              <td>
+                <p class="fw-normal mb-1">
+                  <% if(vehicle.leaveTime){ %>
+                    <%= vehicle.leaveTime.toLocaleString() %>
+                      <% }else{ %>
+                        <% } %>
+                </p>
+              </td>
+
+              <td>
+                <% if(vehicle.totalFee){ %>
+                  <span class="badge bg-success fs-6">
+                    <%= vehicle.totalFee %>$
+                  </span>
+                  <% }else{ %>
+                    <% } %>
+
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
     <% } %>
-</ul>
