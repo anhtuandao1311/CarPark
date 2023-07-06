@@ -15,8 +15,8 @@ const vehicleSchema = new Schema({
     type: Date,
     required: true
   },
-  totalFee: Number,
-  leaveTime: Date
+  leaveTime: Date,
+  fee: Number
 })
 
 module.exports = mongoose.model('Vehicle', vehicleSchema) 

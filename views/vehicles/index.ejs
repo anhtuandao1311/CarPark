@@ -1,79 +1,184 @@
 <% layout('layouts/boilerplate') %>
 
+  <div class="row mt-3">
+    <div class="offset-2 col-8">
+
+      <!-- BEGIN FORM -->
+      <div class="container">
+        <form action="/vehicles" method="post">
+          <div class="row">
+            <div class="col-6">
+              <label for="type" class="form-label">Vehicle Type</label>
+              <select name="type" class="form-select" id="type">
+                <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
+                <option value="Four Seater">4 Seater</option>
+                <option value="Seven Seater">7 Seater</option>
+                <option value="Truck">Truck</option>
+              </select>
+            </div>
+
+            <div class="col-6">
+              <label for="status" class="form-label">Status</label>
+              <select name="status" class="form-select" id="status">
+                <option value="" disabled selected hidden>--Please Choose Vehicle Status--</option>
+                <option value="in">In</option>
+                <option value="out">Out</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="">
+            <div class="form-group row">
+              <label for="enterdate" class="col-3 col-form-label">Enter Date</label>
+              <div class="col-9 input-group">
+                <input type="text" class="form-control bg-white datepicker ps-2" name="enterdate" id="enterdate"
+                  placeholder="--mm/dd/yyyy--" readonly>
+                <span class="input-group-append">
+                  <span class="input-group-text bg-light d-block">
+                    <i class="bi bi-calendar"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-group row">
+              <label for="leavedate" class="col-3 col-form-label">Leave Date</label>
+              <div class="col-9 input-group">
+                <input type="text" class="form-control bg-white datepicker ps-2" name="leavedate" id="leavedate"
+                  placeholder="--mm/dd/yyyy--" readonly>
+                <span class="input-group-append">
+                  <span class="input-group-text bg-light d-block">
+                    <i class="bi bi-calendar"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Find</button>
+          </div>
+        </form>
+      </div>
+      <!-- END FORM -->
+
+      <!-- BEGIN TABLE -->
+      <div class="table-wrapper-scroll-y my-custom-scrollbar mt-2">
+        <table class="table align-middle mb-0 bg-white" id="data-table" style="border-style: none;">
+          <thead class="bg-dark text-white">
+            <tr>
+              <th>License Plate</th>
+              <th>Vehicle Type</th>
+              <th>Status</th>
+              <th>Enter Time</th>
+              <th>Leave Time</th>
+              <th>Fee</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let vehicle of vehicles){ %>
+              <tr>
+                <td>
+                  <p class="fw-bold mb-1">
+                    <%= vehicle.licensePlate %>
+                  </p>
+                </td>
+
+                <td>
+                  <p class="fw-normal mb-1">
+                    <%= vehicle.vehicleType %>
+                  </p>
+                </td>
+
+                <td>
+                  <% if(vehicle.leaveTime){ %>
+                    <span class="badge rounded-pill bg-success">OUT</span>
+                    <% }else{ %>
+                      <span class="badge rounded-pill bg-warning">IN</span>
+                      <% } %>
+                </td>
+
+                <td>
+                  <p class="fw-normal mb-1">
+                    <%= vehicle.enterTime.toLocaleString() %>
+                  </p>
+                </td>
+
+                <td>
+                  <p class="fw-normal mb-1">
+                    <% if(vehicle.leaveTime){ %>
+                      <%= vehicle.leaveTime.toLocaleString() %>
+                        <% }else{ %>
+                          <% } %>
+                  </p>
+                </td>
+
+                <td>
+                  <% if(vehicle.fee){ %>
+                    <span class="badge bg-success fs-6">
+                      <%= vehicle.fee %>$
+                    </span>
+                    <% }else{ %>
+                      <% } %>
+
+                </td>
+              </tr>
+              <% } %>
+          </tbody>
+
+          <tfoot class="bg-dark text-white">
+            <tr>
+              <th>Total</th>
+              <th>Vehicle Type</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>
+              <th>Total Fee</th>
+            </tr>
+
+
+            <tr class="bg-white text-dark">
+              <td>
+                <p class="fw-bold mb-1">
+                  <%= vehicles.length %>
+                </p>
+              </td>
+              <td>
+                <% if(method==='POST'){ %>
+                  <% if(vehicleType){ %>
+                    <p class="fw-normal mb-1">
+                      <%= vehicleType %>
+                    </p>
+                    <% } %>
+                      <% } %>
+              </td>
+              <td>
+                <% if(method==='POST'){ %>
+                  <% if(status && status==='in' ){ %>
+                    <span class="badge rounded-pill bg-warning">IN</span>
+                    <% }else if(status && status==='out'){ %>
+                      <span class="badge rounded-pill bg-success">OUT</span>
+                    <% } %>
+                <% } %>
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                <span class="badge bg-success fs-6">
+                  <%= totalFee %>$
+                </span>
+              </td>
+            </tr>
+
+          </tfoot>
+        </table>
+      </div>
+      <!-- END TABLE -->
+
+    </div>
+    <!-- </div>
   <h1>All Vehicles</h1>
-
-  <form action="/vehicles" method="post">
-    <div class="row">
-      <div class="col">
-        <div class="form-outline">
-          <label for="type" class="form-label">Vehicle Type</label>
-          <select name="type" class="form-select" id="type">
-            <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
-            <option value="Four Seater">4 Seater</option>
-            <option value="Seven Seater">7 Seater</option>
-            <option value="Truck">Truck</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="form-outline">
-          <label for="view" class="form-label">Vehicle view</label>
-          <select name="view" class="form-select" id="view">
-            <option value="" disabled selected hidden>--Please Choose View Type--</option>
-            <option value="">Day</option>
-            <option value="Seven Seater">Month</option>
-            <option value="Truck">Year</option>
-        </div>
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="view" class="form-label">Vehicle view</label>
-        <select name="view" class="form-select" id="view">
-          <option value="" disabled selected hidden>--Please Choose View Type--</option>
-          <option value="">4 Seater</option>
-          <option value="Seven Seater">7 Seater</option>
-          <option value="Truck">Truck</option>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>
-
-
-
   <form action="/vehicles">
     <div class="row">
       <div class="col">
@@ -149,70 +254,4 @@
 
 
     <button>Filter</button>
-  </form>
-  <% if(vehicles.length!==0){ %>
-    <div class="table-wrapper-scroll-y my-custom-scrollbar mt-5">
-      <table class="table align-middle mb-0 bg-white table-responsive" id="data-table">
-        <thead class="bg-dark text-white">
-          <tr>
-            <th>License Plate</th>
-            <th>Vehicle Type</th>
-            <th>Status</th>
-            <th>Enter Time</th>
-            <th>Leave Time</th>
-            <th>Total Fee</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (let vehicle of vehicles){ %>
-            <tr>
-              <td>
-                <p class="fw-bold mb-1">
-                  <%= vehicle.licensePlate %>
-                </p>
-              </td>
-
-              <td>
-                <p class="fw-normal mb-1">
-                  <%= vehicle.vehicleType %>
-                </p>
-              </td>
-
-              <td>
-                <% if(vehicle.leaveTime){ %>
-                  <span class="badge rounded-pill bg-success">OUT</span>
-                  <% }else{ %>
-                    <span class="badge rounded-pill bg-warning">IN</span>
-                    <% } %>
-              </td>
-
-              <td>
-                <p class="fw-normal mb-1">
-                  <%= vehicle.enterTime.toLocaleString() %>
-                </p>
-              </td>
-
-              <td>
-                <p class="fw-normal mb-1">
-                  <% if(vehicle.leaveTime){ %>
-                    <%= vehicle.leaveTime.toLocaleString() %>
-                      <% }else{ %>
-                        <% } %>
-                </p>
-              </td>
-
-              <td>
-                <% if(vehicle.totalFee){ %>
-                  <span class="badge bg-success fs-6">
-                    <%= vehicle.totalFee %>$
-                  </span>
-                  <% }else{ %>
-                    <% } %>
-
-              </td>
-            </tr>
-            <% } %>
-        </tbody>
-      </table>
-    </div>
-    <% } %>
+  </form> -->

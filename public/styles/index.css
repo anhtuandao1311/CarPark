@@ -1,6 +1,6 @@
 .my-custom-scrollbar {
   position: relative;
-  height: 600px;
+  height: 500px;
   overflow: auto;
   display: block;
 }
@@ -11,3 +11,11 @@
   top:0;
 }
 
+.my-custom-scrollbar tfoot{
+  position: sticky;
+  bottom:0;
+}
+
+tfoot tr,tfoot th,tfoot td{
+  border-style: none;
+}
