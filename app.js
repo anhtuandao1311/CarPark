@@ -7,7 +7,10 @@ const ejsMate = require('ejs-mate')
 
 // Require modules
 const Vehicle = require('./models/vehicle')
-const Fee = require('./models/fee')
+const catchAsync = require('./Utils/catchAsync')
+const ExpressError = require('./Utils/expressError')
+const { calculateFee, calculateTotalFee, getFeeRate, getFormattedDate } = require('./Utils/utilsFunction')
+const { vehicleSchema } = require('./requestValidationSchemas')
 
 // Connect to mongoose
 mongoose.connect('mongodb://127.0.0.1:27017/netpower-car-park')
@@ -35,22 +38,31 @@ app.use(express.urlencoded({ extended: true }))
 // Use method override
 app.use(methodOverride('_method'))
 
+const validateVehicle = (req, res, next) => {
+  const { error } = vehicleSchema.validate(req.body)
+  if (error) {
+    const message = error.details.map(ele => ele.message).join(',')
+    throw new ExpressError(message, 400)
+  } else {
+    next()
+  }
+}
 
 app.get('/', (req, res) => {
   res.render('vehicles/home')
 })
 
 
-app.post('/', async (req, res) => {
+app.post('/', validateVehicle, catchAsync(async (req, res, next) => {
   const currentTime = new Date()
   const { type, license } = req.body
   const vehicle = new Vehicle({ vehicleType: type, licensePlate: license, enterTime: currentTime })
   await vehicle.save()
   res.redirect('/')
-})
+}))
 
 
-app.patch('/', async (req, res) => {
+app.patch('/', catchAsync(async (req, res, next) => {
   const currentTime = new Date()
   const { license } = req.body
   const foundVehicle = await Vehicle.findOne({ licensePlate: license, fee: { $exists: false } })
@@ -59,39 +71,23 @@ app.patch('/', async (req, res) => {
   const fee = calculateFee(enterTime, currentTime, feeRate)
   const leaveVehicle = await Vehicle.findOneAndUpdate({ licensePlate: license }, { fee: fee, leaveTime: currentTime }, { runValidators: true })
   res.redirect('/')
-})
+}))
 
 
 
-app.get('/vehicles', async (req, res) => {
-  // const { fourseater: fourSeater, sevenseater: sevenSeater, truck } = req.query
-  // let vehicles = []
-  // if (fourSeater) {
-  //   vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Four Seater' }))
-  // }
-  // if (sevenSeater) {
-  //   vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Seven Seater' }))
-  // }
-  // if (truck) {
-  //   vehicles = vehicles.concat(await Vehicle.find({ vehicleType: 'Truck' }))
-  // }
-
-  // if (!fourSeater && !sevenSeater && !truck) {
-  //   const foundVehicles = await Vehicle.find({})
-  //   vehicles = vehicles.concat(foundVehicles)
-  // }
+app.get('/vehicles', catchAsync(async (req, res, next) => {
   let vehicles = []
   const currentDate = new Date()
   const tempVehicles = await Vehicle.find({})
   for (let tempVehicle of tempVehicles) {
-      if (tempVehicle.enterTime.toLocaleDateString() === currentDate.toLocaleDateString()) {
-        vehicles.push(tempVehicle)
-      }
+    if (tempVehicle.enterTime.toLocaleDateString() === currentDate.toLocaleDateString()) {
+      vehicles.push(tempVehicle)
     }
+  }
   res.render('vehicles/index', { vehicles, method: req.method, totalFee: calculateTotalFee(vehicles) })
-})
+}))
 
-app.post('/vehicles', async (req, res) => {
+app.post('/vehicles', catchAsync(async (req, res, next) => {
   const { type, status, enterdate: enterDate, leavedate: leaveDate } = req.body
   let vehicles = []
   const tempVehicles = await Vehicle.find({})
@@ -145,6 +141,16 @@ app.post('/vehicles', async (req, res) => {
 
 
   res.render('vehicles/index', { vehicles, method: req.method, vehicleType: type, status, totalFee: calculateTotalFee(vehicles) })
+}))
+
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page Not Found', 404))
+})
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err
+  if (!err.message) err.message = 'Something Went Wrong'
+  res.status(statusCode).render('errors/error', { err })
 })
 
 app.listen(3000, () => {
@@ -153,41 +159,5 @@ app.listen(3000, () => {
 
 
 
-
-
-
-
-
-// Utils
-
-
-function getFormattedDate(date) {
-  let splitDate = date.split('/')
-  splitDate = splitDate.map(function (elem) {
-    return parseInt(elem)
-  })
-  return `${splitDate[0]}/${splitDate[1]}/${splitDate[2]}`
-}
-
-function calculateFee(enterTime, leaveTime, fee) {
-  const parkedHours = (leaveTime - enterTime) / 1000 / 60 / 60
-  return Math.ceil(parkedHours / 24) * fee
-}
-
-function calculateTotalFee(objectArray) {
-  let totalFee = 0
-  for (let object of objectArray) {
-    if (object.fee) totalFee += object.fee
-  }
-  return totalFee
-}
-
-
-async function getFeeRate(vehicleType) {
-  const parkingFee = await Fee.findOne({})
-  if (vehicleType === 'Four Seater') return parkingFee.fourSeaterFee
-  else if (vehicleType === 'Seven Seater') return parkingFee.sevenSeaterFee
-  return parkingFee.truckFee
-}
 
 

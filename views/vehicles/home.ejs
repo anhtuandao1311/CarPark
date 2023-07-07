@@ -3,19 +3,26 @@
   <div class="row" style="margin-top: 10rem;">
     <div class="offset-2 col-4">
       <h1>Car enter</h1>
-      <form action="/" method="post">
+      <form action="/" method="post" novalidate class="validated-form">
         <div class="mb-3">
           <label for="license" class="form-label">License Plate</label>
-          <input type="text" class="form-control" id="license" aria-describedby="license" placeholder="Enter license plate" name="license">
+          <input type="text" class="form-control" id="license" aria-describedby="license"
+            placeholder="Enter license plate" name="license" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
         <div class="mb-3">
           <label for="type" class="form-label">Vehicle Type</label>
-          <select name="type" class="form-select" id="type">
+          <select name="type" class="form-select" id="type" required>
             <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
             <option value="Four Seater">4 Seater</option>
             <option value="Seven Seater">7 Seater</option>
             <option value="Truck">Truck</option>
           </select>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -23,10 +30,14 @@
 
     <div class="col-4">
       <h1>Car leave</h1>
-      <form action="/?_method=PATCH" method="post">
+      <form action="/?_method=PATCH" method="post" class="validated-form" novalidate>
         <div class="mb-3">
           <label for="license" class="form-label">License Plate</label>
-          <input type="text" class="form-control" id="license" aria-describedby="license" placeholder="Enter license plate" name="license">
+          <input type="text" class="form-control" id="license" aria-describedby="license"
+            placeholder="Enter license plate" name="license" required>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -34,9 +45,9 @@
   </div>
 
 
-  
 
-<!--   
+
+  <!--   
   <form action="/?_method=PATCH" method="post">
     <div>
       <input type="text" name="license" placeholder="Enter license plate">
@@ -69,3 +80,26 @@
       <button>Submit</button>
     </div>
   </form> -->
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.validated-form')
+
+      // Loop over them and prevent submission
+      Array.from(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
