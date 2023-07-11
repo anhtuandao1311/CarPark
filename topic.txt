@@ -4,9 +4,9 @@ While vehicle parking car owner want to make service for their car as: wash, cha
 Each car have: Number, Input Time
 
 Time will be count: 1 - >=24h as 1day, 24h - >=48h as 2day and so on.
-- Calculate the bill for each car/all car base in today or in the future.
+- Calculate the bill for each car/all car base in today or in the future.♥♥♥
 - Summary car input/output in day/month/year
-- Count number for each car
+- Count number for each car  ♥♥♥
 
 Bonus: Assumption you are the boss then want to sale your product for many customer. So thinking about what is more feature user want to use and make this for money.
 

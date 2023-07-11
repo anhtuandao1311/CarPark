@@ -1,6 +1,11 @@
 <% layout('layouts/boilerplate') %>
   <!-- Car in -->
-  <div class="row" style="margin-top: 10rem;">
+  <div class="row">
+    <div class="col-8 offset-2" style="height:66px;margin-top: 10rem;">
+      <%- include('../partials/flash') %>
+    </div>
+  </div>
+  <div class="row">
     <div class="offset-2 col-4">
       <h1>Car enter</h1>
       <form action="/" method="post" novalidate class="validated-form">
@@ -43,63 +48,6 @@
       </form>
     </div>
   </div>
+  
 
-
-
-
-  <!--   
-  <form action="/?_method=PATCH" method="post">
-    <div>
-      <input type="text" name="license" placeholder="Enter license plate">
-    </div>
-    <div>
-      <button>Submit</button>
-    </div>
-  </form>
-
-
-  <a href="/vehicles">View all vehicles</a>
-
-
-
-  <form action="/" method="post">
-    <div>
-      <input type="text" name="license" placeholder="Enter license plate">
-    </div>
-
-    <div>
-      <select name="type">
-        <option value="" disabled selected hidden>--Please Choose Vehicle Type--</option>
-        <option value="Four Seater">4 Seater</option>
-        <option value="Seven Seater">7 Seater</option>
-        <option value="Truck">Truck</option>
-      </select>
-    </div>
-
-    <div>
-      <button>Submit</button>
-    </div>
-  </form> -->
-
-  <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-      'use strict'
-
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      const forms = document.querySelectorAll('.validated-form')
-
-      // Loop over them and prevent submission
-      Array.from(forms)
-        .forEach(function (form) {
-          form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-          }, false)
-        })
-    })()
-  </script>
+  
