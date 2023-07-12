@@ -6,14 +6,19 @@ const methodOverride = require('method-override')
 const ejsMate = require('ejs-mate')
 const session = require('express-session')
 const flash = require('connect-flash')
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
 
 // Require modules
 const Vehicle = require('./models/vehicle')
+const User = require('./models/user')
 const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
 const { calculateTotalFee, getFormattedDate } = require('./utils/utilsFunction')
-const home = require('./routes/home')
-const vehicles = require('./routes/vehicles')
+
+const homeRoutes = require('./routes/home')
+const vehiclesRoutes = require('./routes/vehicles')
+const userRoutes = require('./routes/user')
 
 // Connect to mongoose
 mongoose.connect('mongodb://127.0.0.1:27017/netpower-car-park')
@@ -54,6 +59,13 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash())
 
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use((req, res, next) => {
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
@@ -61,8 +73,9 @@ app.use((req, res, next) => {
 })
 
 // Use required routes
-app.use('/', home)
-app.use('/vehicles', vehicles)
+app.use('/', homeRoutes)
+app.use('/', userRoutes)
+app.use('/vehicles', vehiclesRoutes)
 
 // 404
 app.all('*', (req, res, next) => {
