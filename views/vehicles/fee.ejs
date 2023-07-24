@@ -1,0 +1,41 @@
+<% layout('layouts/boilerplate') %>
+  <!-- Car in -->
+  <div class="row">
+    <div class="col-8 offset-2" style="height:66px;margin-top: 10rem;">
+      <%- include('../partials/flash') %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="offset-2 col-8">
+      <h1>Update Fee</h1>
+      <form action="/fee?_method=PUT" method="post" novalidate class="validated-form">
+        <div class="mb-3">
+          <label for="fourSeaterFee" class="form-label">Four Seater fee</label>
+          <input type="text" class="form-control" id="fourSeaterFee" aria-describedby="fourSeaterFee"
+            placeholder="Enter new fee" name="fourSeaterFee" value="<%= fee.fourSeaterFee %>" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="sevenSeaterFee" class="form-label">Seven Seater fee</label>
+          <input type="text" class="form-control" id="sevenSeaterFee" aria-describedby="sevenSeaterFee"
+            placeholder="Enter new fee" name="sevenSeaterFee" value="<%= fee.sevenSeaterFee %>" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="truckFee" class="form-label">Truck fee</label>
+          <input type="text" class="form-control" id="truckFee" aria-describedby="truckFee"
+            placeholder="Enter new fee" name="truckFee" value="<%= fee.truckFee %>" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>

@@ -1,0 +1,128 @@
+<% layout('layouts/boilerplate') %>
+  <!-- <div class="row">
+    <div class="col-8 offset-2" style="height:66px;margin-top: 10rem;">
+      <%- include('../partials/flash') %>
+    </div>
+  </div> -->
+  <div class="row" style="margin-top: 3rem;">
+    <div class="offset-2 col-4">
+      <h1>Summary</h1>
+      <form action="/summary" method="post" novalidate class="validated-form mb-5">
+        <div class="mb-3">
+          <div class="form-group row">
+            <label for="monthpicker" class=" col-form-label">Month Picker</label>
+            <div class="col-9 input-group">
+              <input type="text" class="form-control bg-white" id="monthpicker" name="month" required readonly>
+              <span class="input-group-append">
+                <span class="input-group-text bg-light d-block">
+                  <i class="bi bi-calendar"></i>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <% if(method==='POST' ) {%>
+        <% if(month){ %>
+          <ul class="list-group mb-5">
+            <li class="list-group-item list-group-item-primary">Total vehicles entered: <%= sumEnterVehicles %>
+            </li>
+            <li class="list-group-item">Total four seaters entered: <%= sumEnterFourSeat %>
+            </li>
+            <li class="list-group-item">Total seven seaters entered: <%= sumEnterSevenSeat %>
+            </li>
+            <li class="list-group-item">Total truck entered: <%= sumEnterTruck %>
+            </li>
+          </ul>
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Total vehicles left: <%= sumLeaveVehicles %>
+            </li>
+            <li class="list-group-item">Total four seaters left: <%= sumLeaveFourSeat %>
+            </li>
+            <li class="list-group-item">Total seven seaters left: <%= sumLeaveSevenSeat %>
+            </li>
+            <li class="list-group-item">Total truck left: <%= sumLeaveTruck %>
+            </li>
+          </ul>
+          <% } %>
+            <% } %>
+
+
+    </div>
+
+    <div class="col-4">
+      <h1 style="visibility: hidden;">Summary</h1>
+      <form action="/summary" method="post" class="validated-form mb-5" novalidate>
+        <div class="mb-3">
+          <div class="form-group row">
+            <label for="yearpicker" class="col-form-label">Year Picker</label>
+            <div class="col-9 input-group">
+              <input type="text" class="form-control bg-white" id="yearpicker" name="year" readonly required>
+              <span class="input-group-append">
+                <span class="input-group-text bg-light d-block">
+                  <i class="bi bi-calendar"></i>
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <% if(method==='POST' ) {%>
+        <% if(year){ %>
+          <ul class="list-group mb-5">
+            <li class="list-group-item list-group-item-primary">Total vehicles entered: <%= sumEnterVehicles %>
+            </li>
+            <li class="list-group-item">Total four seaters entered: <%= sumEnterFourSeat %>
+            </li>
+            <li class="list-group-item">Total seven seaters entered: <%= sumEnterSevenSeat %>
+            </li>
+            <li class="list-group-item">Total truck entered: <%= sumEnterTruck %>
+            </li>
+          </ul>
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">Total vehicles left: <%= sumLeaveVehicles %>
+            </li>
+            <li class="list-group-item">Total four seaters left: <%= sumLeaveFourSeat %>
+            </li>
+            <li class="list-group-item">Total seven seaters left: <%= sumLeaveSevenSeat %>
+            </li>
+            <li class="list-group-item">Total truck left: <%= sumLeaveTruck %>
+            </li>
+          </ul>
+          <% } %>
+            <% } %>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
+
+
+  <script>
+    $("#monthpicker").datepicker({
+      format: "mm-yyyy",
+      viewMode: "months",
+      minViewMode: "months",
+      autoclose: true
+    });
+
+    $(document).ready(function () {
+      $("#yearpicker").datepicker({
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years",
+        autoclose: true
+      });
+    })
+  </script>

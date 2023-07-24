@@ -177,84 +177,6 @@
       <!-- END TABLE -->
 
     </div>
-    <!-- </div>
-  <h1>All Vehicles</h1>
-  <form action="/vehicles">
-    <div class="row">
-      <div class="col">
-        <input type="checkbox" id="four-seater" name="fourseater" value="true">
-        <label for="four-seater">4 Seater</label><br>
-        <input type="checkbox" id="seven-seater" name="sevenseater" value="true">
-        <label for="seven-seater">7 Seater</label><br>
-        <input type="checkbox" id="truck" name="truck" value="true">
-        <label for="truck">Truck</label><br>
-      </div>
-
-      <div class="col select-view-by">
-        <div class="display-4">Sort by</div>
-        <div class="form-check">
-          <input class="form-check-input " type="radio" name="view" id="day" value="day">
-          <label class="form-check-label" for="day">
-            Day
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="view" id="month" value="month">
-          <label class="form-check-label" for="month">
-            Month
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="view" id="year" value="year">
-          <label class="form-check-label" for="year">
-            Year
-          </label>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="form-group row">
-          <label for="datepicker" class="col-3 col-form-label">Date Picker</label>
-          <div class="col-9 input-group">
-            <input type="text" class="form-control bg-white" id="datepicker" readonly>
-            <span class="input-group-append">
-              <span class="input-group-text bg-light d-block">
-                <i class="bi bi-calendar"></i>
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="monthpicker" class="col-3 col-form-label">Month Picker</label>
-          <div class="col-9 input-group">
-            <input type="text" class="form-control bg-white" id="monthpicker" readonly>
-            <span class="input-group-append">
-              <span class="input-group-text bg-light d-block">
-                <i class="bi bi-calendar"></i>
-              </span>
-            </span>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="yearpicker" class="col-3 col-form-label">Year Picker</label>
-          <div class="col-9 input-group">
-            <input type="text" class="form-control bg-white" id="yearpicker" readonly>
-            <span class="input-group-append">
-              <span class="input-group-text bg-light d-block">
-                <i class="bi bi-calendar"></i>
-              </span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-    <button>Filter</button>
-  </form> -->
 
     <script src="/scripts/index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -269,19 +191,4 @@
         });
       })
 
-      $("#monthpicker").datepicker({
-        format: "mm-yyyy",
-        viewMode: "months",
-        minViewMode: "months",
-        autoclose: true
-      });
-
-      $(document).ready(function () {
-        $("#yearpicker").datepicker({
-          format: "yyyy",
-          viewMode: "years",
-          minViewMode: "years",
-          autoclose: true
-        });
-      })
     </script>

@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config();
+}
+
 // Require libraries and frameworks
 const express = require('express')
 const path = require('path')
@@ -8,6 +12,7 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
+const MongoStore = require('connect-mongo');
 
 // Require modules
 const Vehicle = require('./models/vehicle')
@@ -19,9 +24,12 @@ const { calculateTotalFee, getFormattedDate } = require('./utils/utilsFunction')
 const homeRoutes = require('./routes/home')
 const vehiclesRoutes = require('./routes/vehicles')
 const userRoutes = require('./routes/user')
+const feeRoutes = require('./routes/fee')
+const summaryRoutes = require('./routes/summary')
 
 // Connect to mongoose
-mongoose.connect('mongodb://127.0.0.1:27017/netpower-car-park')
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/netpower-car-park'
+mongoose.connect(dbUrl)
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection error:'))
 db.once('open', () => {
@@ -45,9 +53,20 @@ app.use(express.urlencoded({ extended: true }))
 // Use method override
 app.use(methodOverride('_method'))
 
+// Mongo session
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 60 * 60,
+  crypto: {
+      secret: 'anhtuan1311'
+  }
+})
+
 // Config session
 const sessionConfig = {
-  secret: 'anhtuan1311',
+  store,
+  name:'session',
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -56,6 +75,11 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }
+
+
+
+
+
 app.use(session(sessionConfig))
 app.use(flash())
 
@@ -77,6 +101,9 @@ app.use((req, res, next) => {
 app.use('/', homeRoutes)
 app.use('/', userRoutes)
 app.use('/vehicles', vehiclesRoutes)
+app.use('/fee', feeRoutes)
+app.use('/summary',summaryRoutes)
+
 
 // 404
 app.all('*', (req, res, next) => {
@@ -95,8 +122,5 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log('on port 3000')
 })
-
-
-
 
 
