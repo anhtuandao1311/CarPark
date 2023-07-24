@@ -7,7 +7,7 @@ module.exports.showFeeForm = async (req, res) => {
 
 module.exports.updateFee = async (req, res) => {
   const { fourSeaterFee, sevenSeaterFee, truckFee } = req.body
-  await Fee.findByIdAndUpdate('64a284625f2ea50b51433604', { fourSeaterFee, sevenSeaterFee, truckFee })
+  await Fee.findByIdAndUpdate('64be5b12a2a7b70d41219eff', { fourSeaterFee, sevenSeaterFee, truckFee })
   req.flash('success','Successfully update fee!')
   res.redirect('/fee')
 }

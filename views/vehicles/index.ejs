@@ -101,14 +101,14 @@
 
                 <td>
                   <p class="fw-normal mb-1">
-                    <%= vehicle.enterTime.toLocaleString() %>
+                    <%= vehicle.enterTime.toLocaleString('th-TH') %>
                   </p>
                 </td>
 
                 <td>
                   <p class="fw-normal mb-1">
                     <% if(vehicle.leaveTime){ %>
-                      <%= vehicle.leaveTime.toLocaleString() %>
+                      <%= vehicle.leaveTime.toLocaleString('th-TH') %>
                         <% }else{ %>
                           <% } %>
                   </p>

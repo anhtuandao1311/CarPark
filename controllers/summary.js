@@ -22,7 +22,7 @@ module.exports.getSummary = async (req, res) => {
 
   if (month) {
     for (let vehicle of vehicles) {
-      let enterDateArr = vehicle.enterTime.toLocaleString().slice(0, 10).trim().slice(0, -1).split('/')
+      let enterDateArr = vehicle.enterTime.toLocaleString('th-TH').slice(0, 10).trim().slice(0, -1).split('/')
       const splitDate = month.split('-')
       for (let i = 0; i < splitDate.length; i++) {
         splitDate[i] = parseInt(splitDate[i])
@@ -39,7 +39,7 @@ module.exports.getSummary = async (req, res) => {
 
       }
       if (vehicle.leaveTime) {
-        const leaveDateArr = vehicle.leaveTime.toLocaleString().slice(0, 10).trim().slice(0, -1).split('/')
+        const leaveDateArr = vehicle.leaveTime.toLocaleString('th-TH').slice(0, 10).trim().slice(0, -1).split('/')
         for (let i = 0; i < leaveDateArr.length; i++) {
           leaveDateArr[i] = parseInt(leaveDateArr[i])
         }
@@ -55,7 +55,7 @@ module.exports.getSummary = async (req, res) => {
   }
   else if (year){
     for (let vehicle of vehicles) {
-      let enterDateArr = vehicle.enterTime.toLocaleString().slice(0, 10).trim().slice(0, -1).split('/')
+      let enterDateArr = vehicle.enterTime.toLocaleString('th-TH').slice(0, 10).trim().slice(0, -1).split('/')
       const splitDate = parseInt(year)
       for (let i = 0; i < enterDateArr.length; i++) {
         enterDateArr[i] = parseInt(enterDateArr[i])
@@ -69,7 +69,7 @@ module.exports.getSummary = async (req, res) => {
 
       }
       if (vehicle.leaveTime) {
-        const leaveDateArr = vehicle.leaveTime.toLocaleString().slice(0, 10).trim().slice(0, -1).split('/')
+        const leaveDateArr = vehicle.leaveTime.toLocaleString('th-TH').slice(0, 10).trim().slice(0, -1).split('/')
         for (let i = 0; i < leaveDateArr.length; i++) {
           leaveDateArr[i] = parseInt(leaveDateArr[i])
         }
