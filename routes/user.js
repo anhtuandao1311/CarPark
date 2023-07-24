@@ -1,13 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const User = require('../models/user')
+const express = require('express');
+const User = require('../models/user');
+const router = express.Router();
+const catchAsync = require('../utils/catchAsync');
+const passport = require('passport');
+const users = require('../controllers/users');
+const { isAdmin } = require('../middleware.js')
 
-router.get('/register', (req, res) => {
-  res.render('users/register')
-})
+router.get('/register', isAdmin, users.renderRegister)
 
-router.post('/register', async (req, res) => {
-  
-})
+router.post('/register', catchAsync(users.register));
 
-module.exports = router
+router.get('/login', users.renderLogin)
+
+router.post('/login',passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), users.login)
+
+router.get('/logout', users.logout)
+
+module.exports = router;

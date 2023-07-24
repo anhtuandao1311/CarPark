@@ -2,12 +2,13 @@ const express = require('express')
 const catchAsync = require('../utils/catchAsync')
 const Vehicle = require('../models/vehicle')
 const { calculateTotalFee, getFormattedDate } = require('../utils/utilsFunction')
+const { isLoggedIn } = require('../middleware.js')
 
-const router = express.Router({mergeParams:true})
+const router = express.Router({ mergeParams: true })
 
 
 
-router.get('/', catchAsync(async (req, res, next) => {
+router.get('/',isLoggedIn, catchAsync(async (req, res, next) => {
   let vehicles = []
   const currentDate = new Date()
   const tempVehicles = await Vehicle.find({})
@@ -19,7 +20,7 @@ router.get('/', catchAsync(async (req, res, next) => {
   res.render('vehicles/index', { vehicles, method: req.method, totalFee: calculateTotalFee(vehicles) })
 }))
 
-router.post('/', catchAsync(async (req, res, next) => {
+router.post('/', isLoggedIn, catchAsync(async (req, res, next) => {
   const { type, status, enterdate: enterDate, leavedate: leaveDate } = req.body
   let vehicles = []
   const tempVehicles = await Vehicle.find({})

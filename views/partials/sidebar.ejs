@@ -1,31 +1,54 @@
 <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-      <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none mt-1">
-        <img src="/images/netpower.png" alt="" class="d-none d-sm-inline" style="width: 2em;height: 2em;margin-right: 0.5em; border-radius: 0.2em;">
-          <span class="fs-3 d-none d-sm-inline">Dashboard</span>
-      </a>
-      <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-          <li class="nav-item">
-              <a href="/" class="nav-link align-middle px-0">
-                <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-              </a>
-          </li>
-          <li class="nav-item">
-            <a href="/vehicles" class="nav-link align-middle px-0">
-              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">All vehicles</span></a>
-            </a>
+    <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none mt-1">
+      <img src="images/netpower.png" alt="" class="d-none d-sm-inline"
+        style="width: 2em;height: 2em;margin-right: 0.5em; border-radius: 0.2em;">
+      <span class="fs-3 d-none d-sm-inline">Dashboard</span>
+    </a>
+    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+      <li class="nav-item">
+        <a href="/" class="nav-link align-middle px-0">
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="/vehicles" class="nav-link align-middle px-0">
+          <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">All vehicles</span></a>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a href="/summary" class="nav-link align-middle px-0">
+          <i class="fs-4 bi bi-clipboard2-data"></i> <span class="ms-1 d-none d-sm-inline">Summary</span></a>
+        </a>
+      </li>
+      <% if(currentUser && currentUser.isAdmin) {%>
+        <li class="nav-item">
+          <a href="/fee" class="nav-link align-middle px-0">
+            <i class="fs-4 bi bi-currency-dollar"></i> <span class="ms-1 d-none d-sm-inline">Adjust Fee</span></a>
+          </a>
         </li>
 
-      </ul>
-      <hr>
-      <div class="dropdown pb-4">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="/images/user_placeholder.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-              <span class="d-none d-sm-inline mx-1">loser</span>
+        <li class="nav-item">
+          <a href="/register" class="nav-link align-middle px-0">
+            <i class="fs-4 bi bi-person-add"></i> <span class="ms-1 d-none d-sm-inline">Create User</span></a>
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-      </div>
+        </li>
+      <% } %>
+
+    </ul>
+    <hr>
+    <div class="dropdown pb-4">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="images/user_placeholder.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+        <span class="d-none d-sm-inline mx-1">
+          <%= currentUser.username %>
+        </span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+      </ul>
+    </div>
   </div>
 </div>
