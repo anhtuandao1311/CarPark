@@ -15,11 +15,8 @@ const LocalStrategy = require('passport-local')
 const MongoStore = require('connect-mongo');
 
 // Require modules
-const Vehicle = require('./models/vehicle')
 const User = require('./models/user')
-const catchAsync = require('./utils/catchAsync')
 const ExpressError = require('./utils/expressError')
-const { calculateTotalFee, getFormattedDate } = require('./utils/utilsFunction')
 
 const homeRoutes = require('./routes/home')
 const vehiclesRoutes = require('./routes/vehicles')
