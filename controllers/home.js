@@ -1,5 +1,5 @@
 const Vehicle = require('../models/vehicle')
-const { calculateFee, getFeeRate } = require('../utils/utilsFunction')
+const { calculateFee, getFeeRate } = require('../utilities/utilsFunction')
 
 module.exports.showHomePage = (req, res) => {
   res.render('vehicles/home')

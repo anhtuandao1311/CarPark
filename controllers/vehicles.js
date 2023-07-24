@@ -1,5 +1,5 @@
 const Vehicle = require('../models/vehicle')
-const { calculateTotalFee, getFormattedDate } = require('../utils/utilsFunction')
+const { calculateTotalFee, getFormattedDate } = require('../utilities/utilsFunction')
 
 
 module.exports.showAllVehicles = async (req, res, next) => {

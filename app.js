@@ -16,7 +16,7 @@ const MongoStore = require('connect-mongo');
 
 // Require modules
 const User = require('./models/user')
-const ExpressError = require('./utils/expressError')
+const ExpressError = require('./utilities/expressError')
 
 // Routes
 const homeRoutes = require('./routes/home')

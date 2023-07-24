@@ -1,5 +1,5 @@
 const express = require('express')
-const catchAsync = require('../utils/catchAsync')
+const catchAsync = require('../utilities/catchAsync')
 const { isAdmin } = require('../middleware.js')
 const fee = require('../controllers/fee')
 const router = express.Router()

@@ -1,5 +1,5 @@
 const { vehicleSchema } = require('./schemas.js');
-const ExpressError = require('./utils/expressError');
+const ExpressError = require('./utilities/expressError.js');
 
 
 module.exports.isLoggedIn = (req, res, next) => {

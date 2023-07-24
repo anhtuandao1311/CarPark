@@ -1,5 +1,5 @@
 const express = require('express')
-const catchAsync = require('../utils/catchAsync')
+const catchAsync = require('../utilities/catchAsync')
 const { validateVehicle, isLoggedIn } = require('../middleware.js')
 const home = require('../controllers/home')
 const router = express.Router()
